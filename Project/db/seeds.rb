@@ -6,52 +6,83 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-ShippingCompany.create([#{name:'MAERSK'}, #Vzla
-	{name:'COSCOS'}, #Colombia
-	{name:'INTERMARINE'}, #Colombia
-	{name:'HAMBURG SUD'}, #Corea
-	{name:'CSAV'}]) #EEUU
+# ShippingCompany.create([#{name:'MAERSK'}, #Vzla
+# 	{name:'HAMBURG SUD'}, 
+# 	{name:'COSCOS'}, 
+# 	{name:'INTERMARINE'}, 
+# 	{name:'CSAV'}]) 
 
-puts 'Se han Cargado todas las Navieras'
+# puts 'Se han Cargado todas las Navieras'
 
-Ship.create([{name:'Albert Maersk',ship_company:1}, #Vzla
-	{name:'Anna Maersk',ship_company:1}, #Vzla
-	{name:'Arnold Maersk',ship_company:1}, #Vzla
-	{name:'Cap Patton','' ship_company:2 }, #Corea
-	{name:'Cap Pasley', ship_company:2 }, #Corea
-	{name:'Cap Doukato', ship_company:2 }, #Corea
+# Ship.create([{name:'Albert Maersk',shipping_company_id:ShippingCompany.first}, #Vzla
+# 	{name:'Anna Maersk',shipping_company:ShippingCompany.first}, #Vzla
+# 	{name:'Arnold Maersk',shipping_company:ShippingCompany.first}, #Vzla
+# 	{name:'Cap Patton', shipping_company:ShippingCompany.all[1]}, #Corea
+# 	{name:'Cap Pasley', shipping_company:ShippingCompany.all[1]}, #Corea
+# 	{name:'Cap Doukato', shipping_company:ShippingCompany.all[1]}]) #Corea
 
-puts 'Se han Cargado todos los Buques'
+# puts 'Se han Cargado todos los Buques'
 
-Nvocc.create([#{name:'DHL'}, #Vzla
-	{name:'Oceanica Internacional'}, #Vzla
-	{name:'Panatlantic Venezuela'}, #Vzla
-	{name:'Intercargo'}, #Vzla Panama
-	{name:'Igy Co'}]) #Corea
+# Nvocc.create([#{name:'DHL'}, #Vzla
+# 	{name:'Oceanica Internacional'}, #Vzla
+# 	{name:'Panatlantic Venezuela'}, #Vzla
+# 	{name:'Intercargo'}, #Vzla Panama
+# 	{name:'Igy Co'}]) #Corea
 
-puts 'Se han Cargado todos los NVOCCS'
+# puts 'Se han Cargado todos los NVOCCS'
 
-Consignee.create([#{name:'Maru Rodrigues', dni:'19294109',phone:'04142594178',address:'Caracas'},
-{name:'Jaqui Rodrigues', dni:'24542263',phone:'04149871254',address:'Caracas'},
-{name:'Manuel Rodrigues', dni:'25837221',phone:'04241535222',address:'Caracas'},
-{name:'Gustavo Rodil', dni:'25345987',phone:'04129555228',address:'Caracas'},
-{name:'Madeleine Rodil', dni:'18234677',phone:'04142865133',address:'Caracas'},
-{name:'Katherine Valera', dni:'19524221',phone:'04141547879',address:'Caracas'},
-{name:'Maru', dni:'19294109',phone:'04142594178',address:'Caracas'},) 
 
-puts 'Se han Cargado todos los NVOCCS'
+# Consignee.create([{dni:'19763233',name:'Katherine Valera',phone:'04141567879',address:'San Antonio'},
+# 	{dni:'19763233',name:'Jaqueline Rodrigues',phone:'04141535222',address:'San Antonio'},
+# 	{dni:'25736417',name:'Gustavo Rodil',phone:'04129555228',address:'La Guaira'},
+# 	{dni:'17652441',name:'Isabel Caires',phone:'0416776354',address:'Caracas'},
+# 	{dni:'18212765',name:'Manuel Rodrigues',phone:'04123998787',address:'Caracas'},
+# 	{dni:'22986123',name:'Katherine Nuñez',phone:'02126337067',address:'San Antonio'},
+# 	{dni:'20888123',name:'Marcos Gomes',phone:'02128731862',address:'Los Teques'},
+# 	{dni:'22765533',name:'Juan Carlos Díaz',phone:'04141678754',address:'Maracaibo'}
+# 	])
 
-Country.create([#{name:'Venezuela'}
-		{name:'Corea'}, 
-	{name: 'Colombia'}, 
-	{name:'Brasil'}, 
-	{name:'EEUU'}])
+# puts 'Se han Cargado todos los Clientes'
 
-puts 'Se han Cargado todos los Países'
+# Country.create([#{name:'Venezuela'}
+# 	{name:'Corea'}, 
+# 	{name: 'Colombia'}, 
+# 	{name:'Brasil'}, 
+# 	{name:'EEUU'}])
 
-Travel.create([{ship:Ship.first, Date.today, code: 'VZLA654'}, 
-	{ship:Ship.first, date:Date.today,code: 'VZLA431'}, 
-	{ship:Ship.last, Date.today, code: 'CORE423'}, 
-	{ship:Ship.last, Date.today, code: 'CORE126'}])
+# puts 'Se han Cargado todos los Países'
 
-puts 'Se han Cargado todos los Países'
+Travel.create([{ship:Ship.first, date:Date.today, code:'VZLA654',status: 1}, 
+	{ship:Ship.first, date:Date.today, code:'VZLA431', status: 0}, 
+	{ship:Ship.last, date:Date.today, code:'CORE423',status: 2}, 
+	{ship:Ship.last, date:Date.today, code:'CORE126',status: 2}])
+
+puts 'Se han Cargado todos los Viajes'
+
+# Container.create([{type_of: 0, size: 0, code:'WRD1457'},
+# 	{type_of: 1, size: 1, code:'WRD1478'},
+# 	{type_of: 0, size: 0, code:'WRD6557'},
+# 	{type_of: 1, size: 0, code:'WRD1547'},
+# 	{type_of: 1, size: 1, code:'WRD1127'},
+# 	{type_of: 0, size: 1, code:'WRD1434'}])
+
+# puts 'Se han Cargado todos los Container'
+
+Bl.create([{travel:Travel.last, code:'NTR0876', emisor:ShippingCompany.all[1]},
+	{travel:Travel.last, code:'NTR0876',master:Bl.all[2],emisor:ShippingCompany.all[1]},
+	{travel:Travel.last, code:'NTR0876',master:Bl.all[2],emisor:ShippingCompany.all[1]},
+	{travel:Travel.last, code:'NTR0876',master:Bl.all[2],emisor:ShippingCompany.all[1]},
+	{travel:Travel.last, code:'NTR0876',master:Bl.all[2],emisor:ShippingCompany.all[1]},
+	{travel:Travel.last, code:'NTR0876',master:Bl.all[2],emisor:ShippingCompany.all[1]},
+	{travel:Travel.last, code:'NTR0876',master:Bl.all[2],emisor:ShippingCompany.all[1]},
+	{travel:Travel.last, code:'NTR0876',master:Bl.all[2],emisor:ShippingCompany.all[1]},
+	{travel:Travel.last, code:'NTR0876',master:Bl.all[2],emisor:ShippingCompany.all[1]},
+	{travel:Travel.last, code:'NTR0876',master:Bl.all[2],emisor:ShippingCompany.all[1]},
+	{travel:Travel.first, code:'VZL12898',master:Bl.first, emisor:ShippingCompany.all[0]},
+	{travel:Travel.first, code:'VZL12898',master:Bl.first, emisor:ShippingCompany.all[0]},
+	{travel:Travel.first, code:'VZL12898',master:Bl.first, emisor:ShippingCompany.all[0]},
+	{travel:Travel.first, code:'VZL12898',master:Bl.first, emisor:ShippingCompany.all[]},
+	])
+
+puts 'Se han Cargado todos los Bls'
+
